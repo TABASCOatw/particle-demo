@@ -11,6 +11,7 @@ import {
 } from "@rainbow-me/rainbowkit";
 import { metaMaskWallet } from "@rainbow-me/rainbowkit/wallets";
 import { ParticleNetwork } from "@particle-network/auth";
+import { particleWallet } from "@particle-network/rainbowkit-ext"
 
 import "@rainbow-me/rainbowkit/styles.css";
 
@@ -26,24 +27,20 @@ const WagmiProvider = ({ children }: { children: React.ReactNode }) => {
     appId: "e808e5ef-caa5-4847-8dc6-7b416ecfaf42",
   });
 
-  //const supportedWallets = useMemo(
-  //  () => ({
-  //    groupName: 'wallet',
-  //    wallets: [
-  //      particleWallet({ chains, authType: 'google' }),
-  //      particleWallet({ chains, authType: 'facebook' }),
-  //      particleWallet({ chains, authType: 'apple' }),
-  //      particleWallet({ chains }),
-  //      metaMaskWallet({ projectId: 'zima', chains }),
-  //    ],
-  //  }),
-  //  [particle],
-  //);
+  const supportedWallets = useMemo(
+    () => ({
+      groupName: 'wallet',
+      wallets: [
+        particleWallet({ chains, authType: 'google' }),
+        particleWallet({ chains, authType: 'facebook' }),
+        particleWallet({ chains, authType: 'apple' }),
+        particleWallet({ chains }),
+        metaMaskWallet({ projectId: 'zima', chains }),
+      ],
+    }),
+    [particle],
+  );
 
-  const supportedWallets = {
-    groupName: "wallet",
-    wallets: [metaMaskWallet({ projectId: "zima", chains })],
-  };
 
   const config = createConfig({
     autoConnect: true,
